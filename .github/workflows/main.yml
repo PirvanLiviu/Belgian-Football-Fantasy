@@ -20,4 +20,10 @@ jobs:
         dotnet-version: '10.0.x'
 
     - name: Restore Dependencies
-      run: dotnet restore BelgianFootballFantasy.slnx
+      run: dotnet restore src/BelgianFootballFantasy.Web/BelgianFootballFantasy.Web.csproj
+
+    - name: Build Application
+      run: dotnet build src/BelgianFootballFantasy.Web/BelgianFootballFantasy.Web.csproj --configuration Release --no-restore
+
+    - name: Run Unit Tests
+      run: dotnet test tests/BelgianFootballFantasy.UnitTests/BelgianFootballFantasy.UnitTests.csproj --configuration Release
