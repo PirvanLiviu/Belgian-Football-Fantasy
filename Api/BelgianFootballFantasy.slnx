@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/BelgianFootballFantasy.Web/BelgianFootballFantasy.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/BelgianFootballFantasy.IntegrationTests/BelgianFootballFantasy.IntegrationTests.csproj" />
+    <Project Path="tests/BelgianFootballFantasy.UnitTests/BelgianFootballFantasy.UnitTests.csproj" />
+  </Folder>
+</Solution>
