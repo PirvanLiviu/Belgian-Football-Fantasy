@@ -1,8 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Api.Models;
 
 public class League
 {
-  public int Id { get; }
+  [Key]
+  public int Id { get; set; }
   public string Name { get; set; }
   public string Code { get; set; }
 }
