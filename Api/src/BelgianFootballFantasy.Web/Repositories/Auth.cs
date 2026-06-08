@@ -5,8 +5,11 @@ using Api.Helpers;
 using Api.Interfaces;
 using Api.Mappers;
 
+namespace Api.Repoistories;
+
 public class AuthRepository : IAuth
 {
+  // Init
   private readonly FootballFantasyDb _context;
 
   public AuthRepository(FootballFantasyDb context)
@@ -18,6 +21,7 @@ public class AuthRepository : IAuth
   {
     return await _context.Users.AnyAsync(u => u.Username == username);
   }
+
 
   public async Task<ApiResponse<LoginResponse>> Register(RegisterPayload body)
   {
@@ -35,7 +39,7 @@ public class AuthRepository : IAuth
       await _context.Users.AddAsync(user);
       await _context.SaveChangesAsync();
 
-      return new ApiResponse<LoginResponse> { Success = true, Message = "User created", Data = null }
+      return new ApiResponse<LoginResponse> { Success = true, Message = "User created", Data = null };
     } catch (Exception e) 
     {
       return new ApiResponse<LoginResponse> { Success = false, Message = e.Message, Data = null}; 
@@ -43,5 +47,7 @@ public class AuthRepository : IAuth
   }
   
   public async Task<ApiResponse<LoginResponse>> Login(LoginPayload body)
-  {}
+  {
+    return null;
+  }
 }

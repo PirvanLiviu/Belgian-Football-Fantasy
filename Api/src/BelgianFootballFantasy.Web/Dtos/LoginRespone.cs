@@ -1,6 +1,6 @@
 namespace Api.Dtos;
 
-public class LoginResponse
+public record LoginResponse
 {
   public string Token { get; set; }
   public string Username { get; set; }

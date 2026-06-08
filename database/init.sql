@@ -1,3 +1,14 @@
+CREATE TABLE player_stats (
+    id SERIAL PRIMARY KEY,
+    player_id INT REFERENCES players(id) ON DELETE CASCADE,
+    match_id INT REFERENCES matches(id) ON DELETE CASCADE,
+    goals INT NOT NULL DEFAULT 0,
+    assists INT NOT NULL DEFAULT 0,
+    tackles_pct NUMERIC(5, 2) DEFAULT 0.00, -- Represents 'tackles (%)'
+    passes_pct NUMERIC(5, 2) DEFAULT 0.00,-- Represents 'passes (%)'
+    points INT DEFAULT 0
+);
+
 -- ==========================================
 -- 1. PRIMARY / INDEPENDENT TABLES
 -- ==========================================
@@ -19,7 +30,8 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL, -- Stored as a hashed string
     budget NUMERIC(10, 2) NOT NULL DEFAULT 100.00,
     points INT NOT NULL DEFAULT 0,
-    verified BOOLEAN NOT NULL DEFAULT FALSE
+    verified BOOLEAN NOT NULL DEFAULT FALSE,
+    formation VARCHAR(5) NOT NULL DEFAULT '4-3-3'
 );
 
 -- Leagues Table
@@ -76,22 +88,27 @@ CREATE TABLE gameweeks (
 
 -- User Player Junction Table (Depends on users, players)
 CREATE TABLE user_player (
-    id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
     player_id INT REFERENCES players(id) ON DELETE CASCADE,
     captain BOOLEAN NOT NULL DEFAULT FALSE,
-    starting BOOLEAN NOT NULL DEFAULT TRUE
+    starting BOOLEAN NOT NULL DEFAULT TRUE,
+    
+    -- DEFINE THE COMPOSITE PRIMARY KEY HERE
+    PRIMARY KEY (user_id, player_id)
 );
 
 -- Player Stats Table (Depends on players, matches)
 CREATE TABLE player_stats (
-    id SERIAL PRIMARY KEY,
     player_id INT REFERENCES players(id) ON DELETE CASCADE,
     match_id INT REFERENCES matches(id) ON DELETE CASCADE,
     goals INT NOT NULL DEFAULT 0,
     assists INT NOT NULL DEFAULT 0,
     tackles_pct NUMERIC(5, 2) DEFAULT 0.00, -- Represents 'tackles (%)'
-    passes_pct NUMERIC(5, 2) DEFAULT 0.00   -- Represents 'passes (%)'
+    passes_pct NUMERIC(5, 2) DEFAULT 0.00,  -- Represents 'passes (%)'
+    points INT DEFAULT 0,
+    
+    -- DEFINE THE COMPOSITE PRIMARY KEY HERE
+    PRIMARY KEY (player_id, match_id)
 );
 
 -- ==========================================

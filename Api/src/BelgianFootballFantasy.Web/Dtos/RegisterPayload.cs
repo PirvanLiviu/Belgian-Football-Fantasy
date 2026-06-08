@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Api.Dtos;
 
-public class RegisterPayload
+public record RegisterPayload
 {
   [EmailAddress]
   public string Email { get; set; }
